@@ -1,4 +1,14 @@
 module.exports = {
+	Post: {
+		user: ({ userId }, __, { dataSources }) =>
+			dataSources.placeholderAPI.getUserById({ userId }),
+	},
+	User: {
+		posts: async ({ id }, __, { dataSources }) => {
+			const posts = await dataSources.placeholderAPI.getAllPosts();
+			return posts.filter((p) => p.userId === id);
+		},
+	},
 	Query: {
 		getPosts: (_, __, { dataSources }) =>
 			dataSources.placeholderAPI.getAllPosts(),

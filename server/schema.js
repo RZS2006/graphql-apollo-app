@@ -6,6 +6,7 @@ const typeDefs = gql`
 		title: String
 		body: String
 		userId: Int
+		user: User
 	}
 
 	type User {
@@ -15,6 +16,7 @@ const typeDefs = gql`
 		email: String
 		phone: String
 		website: String
+		posts: [Post]
 	}
 
 	type Query {
