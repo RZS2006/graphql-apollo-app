@@ -7,11 +7,13 @@ class PlaceholderAPI extends RESTDataSource {
 	}
 
 	async getAllPosts() {
-		return await this.get('posts');
+		const res = await this.get('posts');
+		return res;
 	}
 
 	async getPostById({ postId }) {
-		return await this.get(`posts/${postId}`);
+		const res = await this.get(`posts/${postId}`);
+		return res;
 	}
 
 	async createPost(post) {
@@ -26,7 +28,7 @@ class PlaceholderAPI extends RESTDataSource {
 		return await this.get('users');
 	}
 
-	async getPostById({ userId }) {
+	async getUserById({ userId }) {
 		return await this.get(`users/${userId}`);
 	}
 }

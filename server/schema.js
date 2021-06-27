@@ -19,9 +19,9 @@ const typeDefs = gql`
 
 	type Query {
 		getPosts: [Post]!
-		getPostById(id: Int): Post
+		getPostById(id: Int!): Post!
 		getUsers: [User]!
-		getUserById: User!
+		getUserById(id: Int!): User!
 
 		hello: String
 		number: Int
