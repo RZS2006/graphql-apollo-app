@@ -1,7 +1,6 @@
 module.exports = {
 	Post: {
-		user: ({ userId }, __, { dataSources }) =>
-			dataSources.placeholderAPI.getUserById({ userId }),
+		user: ({ userId }, __, { userLoader }) => userLoader.load(userId),
 	},
 	User: {
 		posts: async ({ id }, __, { dataSources }) => {
