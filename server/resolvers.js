@@ -8,7 +8,18 @@ module.exports = {
 			dataSources.placeholderAPI.getAllUsers(),
 		getUserById: (_, { id }, { dataSources }) =>
 			dataSources.placeholderAPI.getUserById({ userId: id }),
-		hello: () => 'Hello world!',
-		number: () => 5,
+	},
+	Mutation: {
+		createPost: (_, { input: post }, { dataSources }) => {
+			return dataSources.placeholderAPI.createPost(
+				JSON.parse(JSON.stringify(post))
+			);
+		},
+		deletePost: async (_, { id }, { dataSources }) => {
+			dataSources.placeholderAPI.deletePost({ postId: id });
+
+			const posts = await dataSources.placeholderAPI.getAllPosts();
+			return posts.filter((p) => p.id !== id);
+		},
 	},
 };

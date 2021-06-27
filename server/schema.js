@@ -22,13 +22,10 @@ const typeDefs = gql`
 		getPostById(id: Int!): Post!
 		getUsers: [User]!
 		getUserById(id: Int!): User!
-
-		hello: String
-		number: Int
 	}
 
 	type Mutation {
-		createPost(input: CreatePostInput): Post
+		createPost(input: CreatePostInput!): Post
 		deletePost(id: Int!): [Post]!
 	}
 
