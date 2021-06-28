@@ -3,10 +3,8 @@ module.exports = {
 		user: ({ userId }, __, { userLoader }) => userLoader.load(userId),
 	},
 	User: {
-		posts: async ({ id }, __, { dataSources }) => {
-			const posts = await dataSources.placeholderAPI.getAllPosts();
-			return posts.filter((p) => p.userId === id);
-		},
+		posts: ({ id }, __, { dataSources }) =>
+			dataSources.placeholderAPI.getPostsByUserId({ userId: id }),
 	},
 	Query: {
 		getPosts: (_, __, { dataSources }) =>
