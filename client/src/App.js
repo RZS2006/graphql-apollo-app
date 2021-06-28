@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Navbar from './components/Navbar';
+import PostsPage from './pages/PostsPage';
+import SinglePostPage from './pages/SinglePostPage';
+import UsersPage from './pages/UsersPage';
+import SingleUserPage from './pages/SingleUserPage';
+import NotFoundPage from './pages/NotFoundPage';
+
+const App = () => {
+	return (
+		<Router>
+			<Navbar />
+			<main>
+				<Switch>
+					<Route exact path="/">
+						<Redirect to="/posts" />
+					</Route>
+					<Route path="/users/:id" component={SingleUserPage} />
+					<Route path="/posts/:id" component={SinglePostPage} />
+					<Route path="/users" component={UsersPage} />
+					<Route path="/posts" component={PostsPage} />
+					<Route path="*" component={NotFoundPage} />
+				</Switch>
+			</main>
+		</Router>
+	);
+};
 
 export default App;
