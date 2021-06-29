@@ -11,8 +11,27 @@ button {
 		'Helvetica Neue', sans-serif;
 }
 
+a {
+	text-decoration: none;
+}
+
 .container {
 	width: 85%;
 	margin: 0 auto;
 	max-width: 1024px;
+}
+
+.form-element {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+.nav {
+	padding: 1rem 0;
+	background-color: whitesmoke;
+	box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+	margin-right: 1rem;
 }

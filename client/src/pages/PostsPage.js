@@ -15,6 +15,16 @@ const GET_POSTS = gql`
 	}
 `;
 
+const CREATE_POST = gql`
+	mutation CreatePost($input: CreatePostInput!) {
+		createPost(input: $input) {
+			id
+			title
+			body
+		}
+	}
+`;
+
 const DELETE_POST = gql`
 	mutation DeletePost($id: Int!) {
 		deletePost(id: $id) {
@@ -30,14 +40,33 @@ const PostsPage = () => {
 	const [deletePost] = useMutation(DELETE_POST, {
 		onCompleted: (data) => setPosts(data.deletePost),
 	});
+	const [createPost] = useMutation(CREATE_POST, {
+		onCompleted: (data) => {
+			const newPost = { ...data.createPost, custom: true };
+			setPosts([newPost, ...posts]);
+		},
+	});
 
 	const [posts, setPosts] = useState([]);
+	const [title, setTitle] = useState('');
+	const [body, setBody] = useState('');
 
 	useEffect(() => {
 		if (!loading && !error && data) {
 			setPosts(data.getPosts);
 		}
 	}, [loading, error, data]);
+
+	const onFormSubmit = (e) => {
+		e.preventDefault();
+
+		if (title.trim().length > 1 && body.trim().length > 1) {
+			createPost({ variables: { input: { title, body } } });
+		}
+
+		setTitle('');
+		setBody('');
+	};
 
 	const onDeletePost = (id) => {
 		deletePost({ variables: { id } });
@@ -50,6 +79,30 @@ const PostsPage = () => {
 		<div>
 			<div className="container">
 				<h1>Posts</h1>
+				<form onSubmit={(e) => onFormSubmit(e)}>
+					<fieldset>
+						<legend>Create Post</legend>
+						<label htmlFor="title" className="form-element">
+							Title
+						</label>
+						<input
+							type="text"
+							id="title"
+							value={title}
+							onChange={(e) => setTitle(e.target.value)}
+							className="form-element"
+						/>
+						<label htmlFor="body" className="form-element">
+							Body
+						</label>
+						<textarea
+							id="body"
+							value={body}
+							onChange={(e) => setBody(e.target.value)}
+							className="form-element"></textarea>
+						<button type="submit">Submit</button>
+					</fieldset>
+				</form>
 				{posts.map((post) => (
 					<div key={post.id}>
 						<h2>
