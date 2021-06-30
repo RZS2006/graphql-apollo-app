@@ -80,7 +80,7 @@ const PostsPage = () => {
 			<div className="container">
 				<h1>Posts</h1>
 				<form onSubmit={(e) => onFormSubmit(e)}>
-					<fieldset>
+					<fieldset className="fieldset">
 						<legend>Create Post</legend>
 						<label htmlFor="title" className="form-element">
 							Title
@@ -109,7 +109,9 @@ const PostsPage = () => {
 							{post.id} - {post.title}
 						</h2>
 						<p>{post.body}</p>
-						<Link to={`/posts/${post.id}`}>View Full</Link>
+						{!post.custom && (
+							<Link to={`/posts/${post.id}`}>View Full</Link>
+						)}
 						<button onClick={() => onDeletePost(post.id)}>
 							Delete
 						</button>
