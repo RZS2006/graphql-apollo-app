@@ -42,7 +42,9 @@ const SingleUserPage = () => {
 				<p>Email: {user.email}</p>
 				<p>Phone: {user.phone}</p>
 				<p>Website: {user.website}</p>
-				<h2>User Posts</h2>
+				<h2 className="section-title">
+					User Posts ({user.posts.length})
+				</h2>
 				{user.posts.map((post) => (
 					<div key={post.id}>
 						<h2>{post.title}</h2>

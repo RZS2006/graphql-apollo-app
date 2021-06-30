@@ -103,6 +103,7 @@ const PostsPage = () => {
 						<button type="submit">Submit</button>
 					</fieldset>
 				</form>
+				<p>{posts.length} result(s)</p>
 				{posts.map((post) => (
 					<div key={post.id}>
 						<h2>

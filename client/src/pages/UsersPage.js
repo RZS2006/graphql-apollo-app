@@ -26,6 +26,7 @@ const UsersPage = () => {
 		<div>
 			<div className="container">
 				<h1>Users</h1>
+				<p>{users.length} result(s)</p>
 				{users.map((user) => (
 					<div key={user.id}>
 						<h2>{user.name}</h2>
